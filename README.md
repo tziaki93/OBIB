@@ -1,10 +1,27 @@
-# OBIB Ontology
+# Ontology for Biobanking (OBIB)
+
+> **Version:** v3 (under review)
 
 OBIB is the OWL ontology that formalizes the concepts defined in the [MIABIS](https://github.com/BBMRI-ERIC/miabis) (Minimum Information About Biobank data Sharing) standard, using BFO (Basic Formal Ontology) and standard OBO Foundry design patterns.
 
-## Status: v3 under review
+Version 2.4 is actively in development to support the implementation requirements of MIABIS v3. Updates to core classes, supporting classes, and object properties are currently underway.
 
-This repository currently holds **OBIB v3**, which is undergoing active review and correction based on detailed feedback from the manager's technical review of the ontology's OWL/BFO modeling.
+* **Sample type**
+* **Aggregated Sample Type**
+
+| Ontology       | MIABIS Version | Classes | Properties | Individuals | Axioms |
+|----------------|-----------------|---------|------------|--------------|--------|
+| OMIABIS (2013) | MIABIS v1       | 249     | 64         | 34           | —      |
+| OBIB (2016)    | MIABIS v2       | 516     | 83         | —            | 1172   |
+| OBIB (2023)    | MIABIS v2       | 1804    | 93         | 226          | 17807  |
+| OBIB (2026)    | MIABIS v2.1     | 1844    | 108        | 226          | 18117  |
+| OBIB (2026)    | MIABIS v2.2     | 1868    | 206        | 226          | 18346  |
+| OBIB (2026)    | MIABIS v2.3     | 1926    | 203        | 267          | 18893  |
+| OBIB (2026)    | MIABIS v3       |     |         |           |   |
+
+*Figures for v3 are as of the latest reviewed file and will be finalized once the review below is complete.*
+
+---
 
 **Note on documentation:** the accompanying documentation still describes the previous version (v2.3). It will be updated once the v3 corrections below are complete. Until then, this README and the changelog are the authoritative reference for what has changed.
 

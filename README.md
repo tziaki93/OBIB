@@ -19,8 +19,6 @@ Version 2.4 is actively in development to support the implementation requirement
 | OBIB (2026)    | MIABIS v2.3     | 1926    | 203        | 267          | 18893  |
 | OBIB (2026)    | MIABIS v3       |     |         |           |   |
 
-*Figures for v3 are as of the latest reviewed file and will be finalized once the review below is complete.*
-
 ---
 
 **Note on documentation:** the accompanying documentation still describes the previous version (v2.3). It will be updated once the v3 corrections below are complete. Until then, this README and the changelog are the authoritative reference for what has changed.

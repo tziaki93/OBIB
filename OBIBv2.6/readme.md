@@ -1,6 +1,6 @@
 # Ontology for Biobanking (OBIB)
 
-> **Version:** 2.6 
+> **Version:** 2.6
 > **Status:** Instance Integration and Ontology Verification
 
 OBIB is an OWL ontology that formalizes the concepts defined in the [MIABIS](https://github.com/BBMRI-ERIC/miabis) (Minimum Information About Biobank data Sharing) standard, using BFO (Basic Formal Ontology) and standard OBO Foundry design patterns.

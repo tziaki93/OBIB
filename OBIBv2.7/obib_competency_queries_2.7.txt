@@ -1,0 +1,183 @@
+SPARQL queries for the proposed competency questions, run on obib_v2.7.owl with example data.
+Example individuals use the prefix ex:.
+In the expected results, rows are separated by ; and columns by a space. 
+
+===== CQ1 =====
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX ex: <http://purl.obolibrary.org/obo/obib/examples#>
+SELECT ?specimen ?source WHERE {
+  VALUES ?specimen { ex:CQ1_specimen_1 ex:CQ1_specimen_2 ex:CQ1_specimen_3 }
+  ?s obo:IAO_0000136 ?specimen .                            # is about
+  ?s a ?source .
+  ?source rdfs:subClassOf obo:OBIB_0002181 .                # sample source
+}
+Expected result: CQ1_specimen_1 OBIB_0002076; CQ1_specimen_2 OBIB_0002074; CQ1_specimen_3 OBIB_0002077
+
+===== CQ2 =====
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX ex: <http://purl.obolibrary.org/obo/obib/examples#>
+SELECT ?type ?member WHERE {
+  ex:CQ2_network_1 a ?type .
+  ?type rdfs:subClassOf obo:OBIB_0002047 .                  # network
+  { ?member obo:RO_0002350 ex:CQ2_network_1 . }             # member of
+  UNION
+  { ?member obo:OBIB_0002068 ex:CQ2_network_1 . }           # included in
+}
+Expected result: OBIB_0002144 CQ2_biobank_1; OBIB_0002144 CQ2_collection_1
+
+===== CQ3 =====
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX ex: <http://purl.obolibrary.org/obo/obib/examples#>
+SELECT ?resource ?type WHERE {
+  VALUES ?resource { ex:CQ3_collection_1 ex:CQ3_research_resource_1 ex:CQ3_donor_1 }
+  { ?resource obo:OBIB_0002058 ?dataset . }                 # dataset type
+  UNION
+  { ?resource obo:OBIB_0002194 ?dataset . }                 # sample donor dataset type
+  ?dataset a ?type .
+  ?type rdfs:subClassOf obo:IAO_0000100 .                   # dataset
+}
+Expected result: CQ3_collection_1 OBIB_0002199; CQ3_donor_1 OBIB_0002210; CQ3_research_resource_1 OBIB_0002200
+
+===== CQ4 =====
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX ex: <http://purl.obolibrary.org/obo/obib/examples#>
+SELECT ?resource ?condition WHERE {
+  VALUES ?resource { ex:CQ4_collection_1 ex:CQ4_specimen_1 }
+  { ?condition obo:OBIB_0002070 ?resource . }               # governs
+  UNION
+  { ?resource obo:OBIB_0002023 ?condition . }               # has condition
+}
+Expected result: CQ4_collection_1 OBIB_0002079; CQ4_collection_1 OBIB_0002080; CQ4_specimen_1 OBIB_0002081
+
+===== CQ5 =====
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX ex: <http://purl.obolibrary.org/obo/obib/examples#>
+SELECT ?value ?unit WHERE {
+  ex:CQ5_specimen_1 obo:OBIB_0002026 ?t .                   # has storage temperature
+  ?t a obo:OBIB_0000689 .                                   # storage temperature setting
+  ?t obo:IAO_0000004 ?value .                               # has measurement value
+  ?t obo:IAO_0000039 ?unit .                                # has measurement unit label
+}
+Expected result: -80 UO_0000027
+
+===== CQ6 =====
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX ex: <http://purl.obolibrary.org/obo/obib/examples#>
+SELECT ?sex WHERE {
+  ex:CQ6_donor_1 obo:OBIB_0002025 ?s .                      # has biological sex
+  ?s a ?sex .
+  ?sex rdfs:subClassOf obo:PATO_0000047 .                   # biological sex
+}
+Expected result: PATO_0000383
+
+===== CQ7 =====
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX ex: <http://purl.obolibrary.org/obo/obib/examples#>
+SELECT ?event ?date WHERE {
+  ex:CQ7_specimen_1 obo:OBIB_0002182 ?event .               # collected at
+  ?d a obo:OBIB_0002205 .                                   # event date and time
+  ?d obo:IAO_0000136 ?event .                               # is about
+  ?d obo:OBI_0002135 ?date .                                # has specified value
+}
+Expected result: CQ7_specimen_1_event 2024-03-15T09:30:00
+
+===== CQ8 =====
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX ex: <http://purl.obolibrary.org/obo/obib/examples#>
+SELECT ?specimen WHERE {
+  ex:CQ8_donor_1 obo:OBIB_0002184 ?specimen .               # donates
+}
+Expected result: CQ8_specimen_1; CQ8_specimen_2
+
+===== CQ9 =====
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX ex: <http://purl.obolibrary.org/obo/obib/examples#>
+SELECT ?capability ?category WHERE {
+  ex:CQ9_biobank_1 obo:OBIB_0002064 ?capability .           # has capability
+  ?capability a ?type .
+  ?type rdfs:subClassOf* ?category .
+  FILTER(?category = obo:OBIB_0002015 || ?category = obo:OBIB_0002016 || ?category = obo:OBIB_0002017)  # infrastructural capabilities, organization capabilities, bioprocessing and analytical capabilities
+}
+Expected result: CQ9_biobank_1_genomics OBIB_0002017; CQ9_biobank_1_sample_storage OBIB_0002015; OBIB_0002091 OBIB_0002016
+
+===== CQ10 =====
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX ex: <http://purl.obolibrary.org/obo/obib/examples#>
+SELECT ?resource ?status WHERE {
+  VALUES ?resource { ex:CQ10_collection_1 ex:CQ10_research_resource_1 ex:CQ10_network_1 }
+  ?resource obo:OBIB_0002071 ?status .                      # has status
+}
+Expected result: CQ10_collection_1 OBIB_0002129; CQ10_network_1 OBIB_0002129; CQ10_research_resource_1 OBIB_0002130
+
+===== CQ11 =====
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX ex: <http://purl.obolibrary.org/obo/obib/examples#>
+SELECT ?resource ?subjects WHERE {
+  VALUES ?resource { ex:CQ11_collection_1 ex:CQ11_research_resource_1 }
+  ?resource obo:OBIB_0002072 ?n .                           # has number of subjects
+  ?n a obo:OBIB_0000687 .                                   # total number of subjects
+  ?n obo:IAO_0000004 ?subjects .                            # has measurement value
+}
+Expected result: CQ11_collection_1 1200; CQ11_research_resource_1 350
+
+===== CQ12 =====
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX ex: <http://purl.obolibrary.org/obo/obib/examples#>
+SELECT ?standard WHERE {
+  ?standard a obo:OBIB_0002018 .                            # quality management standard
+  ?standard obo:OBIB_0002065 ex:CQ12_biobank_1 .            # conforms to
+}
+Expected result: OBIB_0002110
+
+===== CQ13 =====
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX ex: <http://purl.obolibrary.org/obo/obib/examples#>
+SELECT ?resource ?code WHERE {
+  {
+    ?disease a obo:OGMS_0000031 .                           # disease
+    ?disease obo:OBIB_0002061 ex:CQ13_collection_1 .        # is associated with
+    ?disease obo:OBI_0002135 ?code .                        # has specified value
+    BIND(ex:CQ13_collection_1 AS ?resource)
+  }
+  UNION
+  {
+    ex:CQ13_specimen_1 obo:OBIB_0002033 ?diagnosis .        # has diagnosis
+    ?diagnosis obo:OBI_0002135 ?code .                      # has specified value
+    BIND(ex:CQ13_specimen_1 AS ?resource)
+  }
+}
+Expected result: CQ13_collection_1 C18; CQ13_collection_1 C20; CQ13_specimen_1 C18.7
+
+===== CQ14 =====
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX ex: <http://purl.obolibrary.org/obo/obib/examples#>
+SELECT ?low ?lowUnit ?high ?highUnit WHERE {
+  ?l a obo:OBIB_0002031 .                                   # age low
+  ?l obo:IAO_0000136 ex:CQ14_collection_1 .                 # is about
+  ?l obo:IAO_0000004 ?low .                                 # has measurement value
+  ?l obo:OBIB_0002039 ?lowUnit .                            # has age unit
+  ?h a obo:OBIB_0002035 .                                   # age high
+  ?h obo:IAO_0000136 ex:CQ14_collection_1 .                 # is about
+  ?h obo:IAO_0000004 ?high .                                # has measurement value
+  ?h obo:OBIB_0002039 ?highUnit .                           # has age unit
+}
+Expected result: 18 UO_0000036 65 UO_0000036
+
+===== CQ15 =====
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX ex: <http://purl.obolibrary.org/obo/obib/examples#>
+SELECT ?design ?setting WHERE {
+  ?design a obo:OBIB_0002044 .                              # collection design
+  ?design obo:OBIB_0002069 ex:CQ15_collection_1 .           # designed
+  ?s obo:OBIB_0002068 ex:CQ15_collection_1 .                # included in
+  ?s a ?setting .
+  ?setting rdfs:subClassOf obo:OBIB_0002042 .               # sample collection setting
+}
+Expected result: OBIB_0002124 OBIB_0002099
+

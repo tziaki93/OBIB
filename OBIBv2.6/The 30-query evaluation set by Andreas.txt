@@ -1,0 +1,32 @@
+1) Diabetes patients who have never been treated with insulin
+2) Colorectal cancer, excluding paediatric donors
+3) MS patients with brain imaging
+4) Proben von Patienten mit Typ-2-Diabetes (E11) und Nierenerkrankung 
+‘Samples from patients with type 2 diabetes (E11) and kidney disease’
+5) Collections with diagnosis C18.7 and available frozen tissue
+6) Chemotherapy patients who happened to also be diabetic
+7) Diabetic patients who happened to have had chemotherapy
+8) Stage III colorectal cancer with matched normal tissue
+9) I need samples for my study
+10) Samples from neutered male animals in veterinary collections
+11) Psoriazis vulgaris diagnosed on patient with diabetes mellitus (E11)
+12) Stroke patients with available MRI scan
+13) Serum from elderly woman patients with Carcinoma uteri and anaemia
+14) Serum/Plasma from patients between 40 and 60 years old treated for myocardial infarction
+15) Urine samples from male Prostate CA and urinary tract infection patients
+16) Muži s vysokým krvným tlakom a infarktom myokardu
+‘Men with high blood pressure and myocardial infarction’
+17) Cardiac arrhythmia and pulmonary embolism donors
+18) FFPE tissue samples from patiens with cirrhosis
+19) Stage 3 lung carcinoma (C34.9) from Poland with value of CYFRA 21-1 between 30 and 60 uq/l
+20) Serum from patients with hyperuricemia
+21) Cerebrospinal fluid from patient diagnosed with meningitis and epilepsy
+22) Donors under 30 with femur fracture and embolism using contraception
+23) Elderly samples diagnosed with Colitis ulcerosa and Anaemia
+24) Austrian patients diagnosed with sclerodermia
+25) Prostate cancer patients treated by chemotherapy with level of PSA over 4 ng/ml
+26) Patients with diabetes mellitus type 2 and Rheumatoid arthritis treated by Corticosteroids
+27) Pregnant female patients diagnosed with SLE
+28) Samples of malignant melanoma patients
+29) Patients diagnosed with cataracta H25
+30) Donors under 18 years old with bronchial asthma and pneumonia, who are not receiving corticosteroid therapy
